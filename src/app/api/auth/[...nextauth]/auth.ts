@@ -1,5 +1,5 @@
 import {Pool} from "@neondatabase/serverless";
-import {AuthOptions, Session, User} from "next-auth";
+import {AuthOptions} from "next-auth";
 import Google from "next-auth/providers/google";
 import PostgresAdapter from "@auth/pg-adapter";
 import {Adapter} from "next-auth/adapters";
@@ -19,7 +19,7 @@ export const authOptions : AuthOptions = {
         })
     ],
     callbacks: {
-        async session({session,token,user}) {
+        async session({session,user}) {
             session.user.id = user.id;
             return session;
         }
