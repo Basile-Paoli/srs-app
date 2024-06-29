@@ -59,11 +59,11 @@
 | srs_level       | int  | niveau de la répétition         |
 
 ### Table `srs_levels`
-| colonne         | type | description                     |
-|-----------------|------|---------------------------------|
-| id              | int  | identifiant du niveau           |
-| name            | text | nom du niveau                   |
-| interval        | int  | interval de répétition          |
+| colonne         | type | description              |
+|-----------------|------|--------------------------|
+| id              | int  | identifiant du niveau    |
+| name            | text | nom du niveau            |
+| interval        | int  | intervalle de répétition |
 
 
 
