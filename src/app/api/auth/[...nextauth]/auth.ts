@@ -8,10 +8,7 @@ const pool = new Pool({
     connectionString: process.env.POSTGRES_URL,
 })
 
-export const authOptions : AuthOptions = {
-
-
-
+export const authOptions: AuthOptions = {
     providers: [
         Google({
             clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -19,7 +16,7 @@ export const authOptions : AuthOptions = {
         })
     ],
     callbacks: {
-        async session({session,user}) {
+        async session({session, user}) {
             session.user.id = user.id;
             return session;
         }

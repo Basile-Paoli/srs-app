@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import {signOut, signIn, useSession} from "next-auth/react";
-import {Sheet, SheetContent, SheetHeader, SheetTrigger} from "@/components/ui/sheet";
+import {Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {HamburgerMenuIcon, HomeIcon, ViewGridIcon, ViewVerticalIcon} from "@radix-ui/react-icons";
-import {usePathname} from "next/navigation";
 import {ElementType} from "react";
 
 type menu = {
@@ -32,28 +31,31 @@ export function Header() {
             icon: ViewGridIcon,
         },
     ]
-    const pathname = usePathname()
-    return (
-        <div className={"flex w-screen"}>
 
-            <Sheet>
-                <SheetTrigger className={"mt-2 ml-3"} asChild>
-                    <Button variant={"outline"}><HamburgerMenuIcon/></Button>
-                </SheetTrigger>
-
-                <SheetContent className={"flex flex-col pt-6"}>
-                    <SheetHeader>
-                        <span className={"font-semibold text-primary"}>SRS App</span>
-                    </SheetHeader>
-                    {menus.map((menu) => (
+    const Navbar = () =>
+        <Sheet>
+            <SheetTrigger className={"mt-2 ml-3"} asChild>
+                <Button variant={"outline"}><HamburgerMenuIcon/></Button>
+            </SheetTrigger>
+            <SheetContent className={"flex flex-col pt-6"}>
+                <SheetHeader>
+                    <span className={"font-semibold text-primary"}>SRS App</span>
+                </SheetHeader>
+                {menus.map((menu) =>
+                    <SheetClose asChild key={menu.name}>
                         <Link key={menu.name} href={menu.href}
                               className={"flex hover:bg-gray-100 hover:text-primary hover:font-semibold items-center gap-3 "}>
                             <menu.icon/>
                             {menu.name}
                         </Link>
-                    ))}
-                </SheetContent>
-            </Sheet>
+                    </SheetClose>
+                )}
+            </SheetContent>
+        </Sheet>
+
+    return (
+        <div className={"flex w-screen"}>
+            <Navbar/>
             <div className={"flex justify-around w-full items-center"}>
 
                 <div className={"justify-center"}>SRS App</div>

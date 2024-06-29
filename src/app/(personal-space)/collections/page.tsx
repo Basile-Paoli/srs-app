@@ -1,31 +1,27 @@
-"use client";
-import {Button} from "@/components/ui/button";
-import {createCollection} from "@/server-actions/collections-repo";
-import {useRouter} from "next/navigation";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbSeparator
-} from "@/components/ui/breadcrumb";
-import Link from "next/link";
 import {SrsBreadcrumb} from "@/components/ui/SrsBreadcrumb";
+import {CreateCollectionButton} from "@/app/(personal-space)/collections/CreateCollectionButton";
+import {getCollections} from "@/app/repository/collections";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
+import {CollectionCard} from "@/components/CollectionCard";
 
 
-export default function Collections() {
-    const router = useRouter();
-    const clickHandler = async () => {
-        const id = await createCollection();
-        router.push(`/collections/edit/${id}`)
-    }
+export default async function Collections() {
+    const session = await getServerSession(authOptions)
+    const collections = await getCollections(session!.user.id)
+    console.log(collections)
     return (
         <>
-            <SrsBreadcrumb items={[{label: "My Collections", href: "/collections"}]}/>
+            <SrsBreadcrumb items={[{value: "My Collections", href: "/collections"}]}/>
             <div className={"flex flex-col"}>
                 <h1 className={"text-center"}>My Collections</h1>
                 <div>
-                    <Button onClick={clickHandler}>Create a collection</Button>
+                    <div className="flex flex-wrap justify-evenly gap-6">
+                        {collections.map((collection) =>
+                            <CollectionCard key={collection.id} collection={collection}/>
+                        )}
+                    </div>
+                    <CreateCollectionButton/>
                 </div>
             </div>
         </>
