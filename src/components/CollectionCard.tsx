@@ -1,13 +1,14 @@
 import React, {ComponentProps} from "react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {cn} from "@/lib/utils";
 
 type Props = {
     collection: Collection;
 } & ComponentProps<"div">;
 
-export function CollectionCard({collection,className, ...props}: Props) {
+export function CollectionCard({collection, className, ...props}: Props) {
     return (
-        <Card {...props} className={"min-w-64"}>
+        <Card {...props} className={cn(className, "min-w-64")}>
             <CardHeader>
                 <CardTitle>{collection.name || "Collection sans nom"}</CardTitle>
             </CardHeader>

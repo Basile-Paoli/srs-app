@@ -1,10 +1,10 @@
-"use client";
 import Link from "next/link";
-import {signOut, signIn, useSession} from "next-auth/react";
 import {Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {HamburgerMenuIcon, HomeIcon, ViewGridIcon, ViewVerticalIcon} from "@radix-ui/react-icons";
 import {ElementType} from "react";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 
 type menu = {
     name: string,
@@ -12,8 +12,8 @@ type menu = {
     icon: ElementType,
 }
 
-export function Header() {
-    const session = useSession()
+export async function Header() {
+    const session = await getServerSession(authOptions)
     const menus: menu[] = [
         {
             name: "Home",
@@ -59,9 +59,10 @@ export function Header() {
             <div className={"flex justify-around w-full items-center"}>
 
                 <div className={"justify-center"}>SRS App</div>
-                {session && session.data ?
-                    <button onClick={() => signOut()}>Log out</button> :
-                    <button onClick={() => signIn()}>Log in</button>}
+                {session && session.user ?
+                    <Link href={"/api/auth/signout"}>Sign out</Link> :
+                    <Link href={"/api/auth/signin"}>Sign in</Link>
+                }
             </div>
         </div>
     );

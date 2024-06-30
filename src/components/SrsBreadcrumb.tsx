@@ -6,19 +6,16 @@ import {
     BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-import React, {DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode} from "react";
-import {JSX} from "react/jsx-runtime";
-import IntrinsicAttributes = JSX.IntrinsicAttributes;
+import React, {ComponentPropsWithoutRef, Fragment,  ReactNode} from "react";
 import {HomeIcon} from "@radix-ui/react-icons";
 
-type Props = {
+interface Props extends ComponentPropsWithoutRef<"nav"> {
     items: { value: ReactNode, href: string }[]
     separator?: React.ReactNode
-} & IntrinsicAttributes & DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+}
 
 export function SrsBreadcrumb({items, ...props}: Props) {
     return (
-
         <Breadcrumb {...props}>
             <BreadcrumbList>
                 <BreadcrumbItem>
