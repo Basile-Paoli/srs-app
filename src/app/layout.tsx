@@ -5,6 +5,7 @@ import {getServerSession} from "next-auth";
 import SessionProvider from "@/components/SessionProvider";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 import {redirect} from "next/navigation";
+import {ReactNode} from "react";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
                                              children,
                                          }: Readonly<{
-    children: React.ReactNode;
+    children: ReactNode;
 }>) {
     const session = await getServerSession(authOptions)
     if (!session || !session.user) {

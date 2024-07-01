@@ -11,3 +11,11 @@ export function collectionFactory(row: QueryResultRow): Collection {
         itemCount: row.item_count !== undefined ? parseInt(row.item_count) : undefined,
     }
 }
+
+export function itemFactory(row: QueryResultRow): Item {
+    return {
+        id: row.id,
+        prompt: row.prompt,
+        description: row.description,
+    }
+}

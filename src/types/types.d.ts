@@ -1,3 +1,4 @@
+type Nullable<T> = T | null
 type Collection = {
     id: number,
     name: Nullable<string>,
@@ -6,4 +7,12 @@ type Collection = {
     defaultAnswerFields: Nullable<string[]>,
     isPublic: boolean,
     itemCount?: number,
+    items?: Item[],
 }
+
+type Item = {
+    id: number,
+    prompt: string,
+    description: Nullable<string>,
+}
+

@@ -1,12 +1,12 @@
 "use client";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
-import {createCollectionAction} from "@/server-actions/collections-actions";
+import {actionCreateCollection} from "@/server-actions/collections-actions";
 
 export function CreateCollectionButton() {
     const router = useRouter();
     const clickHandler = async () => {
-        const id = await createCollectionAction();
+        const id = await actionCreateCollection();
         router.push(`/collections/edit/${id}`)
     }
     return (
