@@ -1,5 +1,6 @@
 type Nullable<T> = T | null
-type Collection = {
+
+interface Collection {
     id: number,
     name: Nullable<string>,
     description: Nullable<string>,
@@ -10,7 +11,11 @@ type Collection = {
     items?: Item[],
 }
 
-type Item = {
+interface CollectionWithItems extends Collection {
+    itemCount: number,
+    items: Item[],
+}
+interface Item {
     id: number,
     prompt: string,
     description: Nullable<string>,

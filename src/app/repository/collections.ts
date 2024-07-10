@@ -20,7 +20,7 @@ export async function getCollectionsByUser(userId: number): Promise<Collection[]
     ))
 }
 
-export async function getCollectionById(collectionId: number): Promise<Nullable<Collection>> {
+export async function getCollectionById(collectionId: number): Promise<Nullable<CollectionWithItems>> {
     const client = await db.connect()
     let result = await client.sql`SElect *
                                   from collections
@@ -29,13 +29,20 @@ export async function getCollectionById(collectionId: number): Promise<Nullable<
         return null
     }
     const collection = collectionFactory(result.rows[0])
-    const {rows} = await client.sql`SELECT i.*  
+    const {rows} = await client.sql`SELECT i.*
                                     from collections_items
                                              JOIN public.items i on i.id = collections_items.item_id
                                     where collection_id = ${collectionId}`
-    collection.itemCount = rows.length
-    collection.items = rows.map(row => (
+
+    const itemCount = rows.length
+    const items = rows.map(row => (
         itemFactory(row)
     ))
-    return collection
+    return {
+        ...collection,
+        items,
+        itemCount,
+    }
 }
+
+
