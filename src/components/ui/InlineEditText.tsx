@@ -1,13 +1,13 @@
 import {KeyboardEvent, ComponentProps, ChangeEventHandler, useState} from "react";
+import {twMerge} from "tailwind-merge";
 
 
-interface Props extends ComponentProps<"input"> {
+interface Props extends ComponentProps<"div"> {
     value: string,
     onChange: ChangeEventHandler<HTMLInputElement>,
     onValidate: () => void
     placeholder?: string
-    spanProps?: ComponentProps<"span">
-    inputProps?: ComponentProps<"input">
+    maxLength?: number
 }
 
 export default function InlineEditText({
@@ -15,6 +15,8 @@ export default function InlineEditText({
                                            onChange,
                                            onValidate,
                                            placeholder = "",
+                                           maxLength,
+                                           className,
                                            ...props
                                        }: Props) {
     const [isEditing, setIsEditing] = useState(false)
@@ -30,16 +32,20 @@ export default function InlineEditText({
         }
     }
 
-    return <div  {...props}>
+    return <div  {...props} className={twMerge("w-full px-10", className)}>
         {isEditing ?
             <input placeholder={placeholder}
+                   type={""}
                    value={value}
                    onChange={onChange}
                    onBlur={handleBlur}
                    onKeyDown={handleKeyDown}
-                   autoFocus/>
+                   autoFocus
+                   className={"p-1 text-center w-full"}
+                   maxLength={maxLength}
+            />
             :
-            <span className={"p-1 hover:bg-gray-200/50"}
-                  onClick={() => setIsEditing(true)}>{value || placeholder}</span>}
+            <p className={"p-1 hover:bg-gray-200/50 text-center"}
+               onClick={() => setIsEditing(true)}>{value || placeholder}</p>}
     </div>
 }

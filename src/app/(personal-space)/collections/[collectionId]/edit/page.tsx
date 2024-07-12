@@ -1,5 +1,5 @@
 import {DashboardLayout} from "@/components/ui/DashboardLayout";
-import {EditCollectionComponent} from "@/app/(personal-space)/collections/[collectionId]/edit/EditCollectionComponent";
+import {EditCollectionInfo} from "@/app/(personal-space)/collections/[collectionId]/edit/EditCollectionInfo";
 import {redirect} from "next/navigation";
 import {getCollectionWithItems} from "@/repository/collections";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
@@ -20,11 +20,26 @@ export default async function EditCollection({params}: {
     if (!session || !session.user || !collection || session.user.id !== collection.creator) {
         redirect("/collections")
     }
-
+    const breadcrumbItems = [
+        {
+            value: "My Collections",
+            href: "/collections"
+        },
+        {
+            value: collection.name || "Collection sans nom",
+            href: `/collections/${collectionId}`
+        },
+        {
+            value: "Edit",
+            href: "#"
+        }
+    ]
     return (
         <DashboardLayout
-            breadcrumbItems={[{value: "My Collections", href: "/collections"}, {value: "Edit", href: "#"}]}>
-            <EditCollectionComponent collection={collection}/>
+            breadcrumbItems={breadcrumbItems}
+        >
+            <h1>Edit Collection {collection.name}</h1>
+            <EditCollectionInfo collection={collection}/>
         </DashboardLayout>
     );
 }
