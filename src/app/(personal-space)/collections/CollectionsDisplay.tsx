@@ -10,7 +10,8 @@ export function CollectionsDisplay() {
     const {data} = useSession()
     const [collections, setCollections] = useState<Collection[]>([])
     useEffect(() => {
-        actionGetCollectionsByUser(data!.user.id).then((result) => {
+        if (!data) return
+        actionGetCollectionsByUser(data.user.id).then((result) => {
             setCollections(result!)
             setIsLoading(false)
         })
