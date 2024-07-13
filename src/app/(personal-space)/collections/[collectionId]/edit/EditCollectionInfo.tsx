@@ -4,6 +4,8 @@ import {useState} from "react";
 import InlineEditText from "@/components/ui/InlineEditText";
 import {actionPutCollection} from "@/server-actions/collections-actions";
 import InlineEditTextArea from "@/components/ui/InlineEditTextArea";
+import {Button} from "@/components/ui/button";
+import {GearIcon} from "@radix-ui/react-icons";
 
 export function EditCollectionInfo({collection}: { collection: CollectionWithItems }) {
     const [collectionName, setCollectionName] = useState(collection.name)
@@ -20,16 +22,20 @@ export function EditCollectionInfo({collection}: { collection: CollectionWithIte
     const validateDescription = () => {
         actionPutCollection({...collection, description: collectionDescription})
     }
-    return <>
+    return <div className={"w-full relative"}>
+        <div className={"absolute right-4 top-0"}>
+            <Button variant={"ghost"}><GearIcon/></Button>
+        </div>
         <InlineEditText value={collectionName ?? ""}
                         onChange={(e) => setCollectionName(e.target.value)}
                         onValidate={validateName}
                         placeholder={"Enter a name"}
                         maxLength={80}
+                        className={"px-32"}
         />
         <InlineEditTextArea value={collectionDescription ?? ""}
                             onTextChange={(e) => setCollectionDescription(e.target.value)}
                             onValidate={validateDescription}
                             placeholder={"Enter a description"}/>
-    </>
+    </div>
 }

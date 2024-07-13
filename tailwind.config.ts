@@ -10,6 +10,9 @@ const config = {
 	],
   prefix: "",
   theme: {
+    fontFamily: {
+        noto: ["Noto Sans", "Noto Sans JP", "sans-serif"],
+    },
     container: {
       center: true,
       padding: "2rem",

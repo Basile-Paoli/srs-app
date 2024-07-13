@@ -1,5 +1,4 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
 import "./globals.css";
 import {getServerSession} from "next-auth";
 import SessionProvider from "@/components/SessionProvider";
@@ -7,7 +6,6 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 import {redirect} from "next/navigation";
 import {ReactNode} from "react";
 
-const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -19,15 +17,15 @@ export default async function RootLayout({
                                          }: Readonly<{
     children: ReactNode;
 }>) {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions).catch(() => redirect("/api/auth/signin"))
     if (!session || !session.user) {
         redirect("/api/auth/signin")
     }
     return (
-        <html lang="en" >
-        <body className={inter.className}>
+        <html lang="en">
+        <body className={"font-noto"}>
         <SessionProvider session={session}>
-                {children}
+            {children}
         </SessionProvider>
         </body>
         </html>

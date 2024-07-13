@@ -4,6 +4,7 @@ import {redirect} from "next/navigation";
 import {getCollectionWithItems} from "@/repository/collections";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 import {getServerSession} from "next-auth";
+import {PageHeading} from "@/components/ui/PageHeading";
 
 export default async function EditCollection({params}: {
     params: { collectionId: string },
@@ -38,7 +39,7 @@ export default async function EditCollection({params}: {
         <DashboardLayout
             breadcrumbItems={breadcrumbItems}
         >
-            <h1>Edit Collection {collection.name}</h1>
+            <PageHeading>Edit Collection</PageHeading>
             <EditCollectionInfo collection={collection}/>
         </DashboardLayout>
     );

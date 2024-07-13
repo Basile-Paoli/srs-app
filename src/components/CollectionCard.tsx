@@ -11,13 +11,14 @@ type Props = {
 
 export function CollectionCard({collection, editable = true, className, ...props}: Props) {
     return (
-        <Card {...props} className={cn(className, "min-w-64")}>
+        <Card {...props} className={cn(className, "min-w-64 max-w-sm")}>
             <CardHeader>
                 <CardTitle>{collection.name || "Collection sans nom"}</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className={"flex flex-col"}>
-                    <p>{collection.description}</p>
+                    <div
+                        className={"whitespace-pre-wrap  leading-6 max-h-[72px] overflow-hidden mb-2"}>{collection.description}</div>
                     <p>{collection.itemCount} items</p>
                     {editable && <Link href={`/collections/${collection.id}/edit`}
 									   className={"hover:bg-gray-100 hover:text-primary w-[30px] h-[30px] self-end p-1 flex justify-center items-center"}><PencilIcon

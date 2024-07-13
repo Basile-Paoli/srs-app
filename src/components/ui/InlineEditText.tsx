@@ -10,15 +10,18 @@ interface Props extends ComponentProps<"div"> {
     maxLength?: number
 }
 
-export default function InlineEditText({
-                                           value,
-                                           onChange,
-                                           onValidate,
-                                           placeholder = "",
-                                           maxLength,
-                                           className,
-                                           ...props
-                                       }: Props) {
+export default function InlineEditText(
+    {
+        value,
+        onChange,
+        onValidate,
+        placeholder = "",
+        maxLength,
+        className,
+        ...props
+    }
+        : Props) {
+
     const [isEditing, setIsEditing] = useState(false)
 
     const handleBlur = () => {
@@ -34,15 +37,16 @@ export default function InlineEditText({
 
     return <div  {...props} className={twMerge("w-full px-10", className)}>
         {isEditing ?
-            <input placeholder={placeholder}
-                   type={""}
-                   value={value}
-                   onChange={onChange}
-                   onBlur={handleBlur}
-                   onKeyDown={handleKeyDown}
-                   autoFocus
-                   className={"p-1 text-center w-full"}
-                   maxLength={maxLength}
+            <input
+                placeholder={placeholder}
+                type={""}
+                value={value}
+                onChange={onChange}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                autoFocus
+                className={"p-1 text-center w-full"}
+                maxLength={maxLength}
             />
             :
             <p className={"p-1 hover:bg-gray-200/50 text-center"}
