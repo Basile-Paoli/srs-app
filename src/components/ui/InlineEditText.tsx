@@ -1,5 +1,5 @@
 import {KeyboardEvent, ComponentProps, ChangeEventHandler, useState} from "react";
-import {twMerge} from "tailwind-merge";
+import {cn} from "@/lib/utils";
 
 
 interface Props extends ComponentProps<"div"> {
@@ -35,7 +35,7 @@ export default function InlineEditText(
         }
     }
 
-    return <div  {...props} className={twMerge("w-full px-10", className)}>
+    return <div  {...props} className={cn("flex justify-center ", className)}>
         {isEditing ?
             <input
                 placeholder={placeholder}
@@ -49,7 +49,7 @@ export default function InlineEditText(
                 maxLength={maxLength}
             />
             :
-            <p className={"p-1 hover:bg-gray-200/50 text-center"}
+            <p className={"p-1 hover:bg-gray-200/50 text-center min-w-[203px] w-full "}
                onClick={() => setIsEditing(true)}>{value || placeholder}</p>}
     </div>
 }

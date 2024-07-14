@@ -1,10 +1,10 @@
 import {DashboardLayout} from "@/components/ui/DashboardLayout";
-import {EditCollectionInfo} from "@/app/(personal-space)/collections/[collectionId]/edit/EditCollectionInfo";
+import EditCollectionInfo from "@/app/(personal-space)/collections/[collectionId]/edit/EditCollectionInfo";
 import {redirect} from "next/navigation";
 import {getCollectionWithItems} from "@/repository/collections";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 import {getServerSession} from "next-auth";
-import {PageHeading} from "@/components/ui/PageHeading";
+import {PageHeading} from "@/components/ui/headings";
 
 export default async function EditCollection({params}: {
     params: { collectionId: string },

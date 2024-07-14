@@ -6,7 +6,7 @@ import {
     ChangeEvent,
     FocusEvent
 } from "react";
-import {twMerge} from "tailwind-merge";
+import {cn} from "@/lib/utils";
 
 
 interface Props extends ComponentProps<"div"> {
@@ -50,7 +50,7 @@ export default function InlineEditTextArea(
         e.currentTarget.style.setProperty('height', `${e.currentTarget.scrollHeight}px`);
     }
 
-    return <div  {...props} className={twMerge("w-full px-10 max-h-96", className)}>
+    return <div  {...props} className={cn("w-full px-10 max-h-96", className)}>
         {isEditing ?
             <textarea
                 placeholder={placeholder}

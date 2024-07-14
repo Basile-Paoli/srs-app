@@ -17,13 +17,13 @@ export default async function RootLayout({
                                          }: Readonly<{
     children: ReactNode;
 }>) {
-    const session = await getServerSession(authOptions).catch(() => redirect("/api/auth/signin"))
+    const session = await getServerSession(authOptions).catch(() => null)
     if (!session || !session.user) {
         redirect("/api/auth/signin")
     }
     return (
         <html lang="en">
-        <body className={"font-noto"}>
+        <body className={"font-noto h-screen flex flex-col"}>
         <SessionProvider session={session}>
             {children}
         </SessionProvider>
