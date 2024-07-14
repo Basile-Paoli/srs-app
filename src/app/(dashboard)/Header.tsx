@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
-import {Navbar} from "@/app/(personal-space)/Navbar";
+import {Navbar} from "@/app/(dashboard)/Navbar";
 import {SignOutButton} from "@/components/SignOutButton";
 
 export async function Header() {

@@ -1,4 +1,4 @@
-import {Header} from "@/app/(personal-space)/Header";
+import {Header} from "@/app/(dashboard)/Header";
 import {Separator} from "@/components/ui/separator";
 import {ReactNode} from "react";
 
@@ -7,9 +7,7 @@ export default function Layout({children}: { children: ReactNode }) {
         <>
             <Header/>
             <Separator orientation={"horizontal"}/>
-            <div className={"w-full h-full"}>
-                {children}
-            </div>
+            {children}
         </>
     );
 }

@@ -1,5 +1,5 @@
-import {DashboardLayout} from "@/components/ui/DashboardLayout";
-import EditCollectionInfo from "@/app/(personal-space)/collections/[collectionId]/edit/EditCollectionInfo";
+import {DashboardLayout} from "@/app/(dashboard)/DashboardLayout";
+import EditCollectionInfo from "@/app/(dashboard)/collections/[collectionId]/edit/EditCollectionInfo";
 import {redirect} from "next/navigation";
 import {getCollectionWithItems} from "@/repository/collections";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";

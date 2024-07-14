@@ -14,6 +14,7 @@ interface Props extends ComponentProps<"div"> {
     onTextChange: ChangeEventHandler<HTMLTextAreaElement>,
     onValidate: () => void
     placeholder?: string
+    maxLength?: number
 }
 
 
@@ -24,6 +25,7 @@ export default function InlineEditTextArea(
         onValidate,
         placeholder = "",
         className,
+        maxLength,
         ...props
     }
         : Props) {
@@ -61,6 +63,7 @@ export default function InlineEditTextArea(
                 onKeyDown={handleKeyDown}
                 autoFocus
                 onFocus={handleFocus}
+                maxLength={maxLength}
             />
             :
             <div className={"p-1 hover:bg-gray-200/50 whitespace-pre-wrap "}

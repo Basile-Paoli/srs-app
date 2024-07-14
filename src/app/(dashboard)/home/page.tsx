@@ -1,9 +1,9 @@
-import {DashboardLayout} from "@/components/ui/DashboardLayout";
+import {DashboardLayout} from "@/app/(dashboard)/DashboardLayout";
 
 export default function Home() {
     return (
         <DashboardLayout breadcrumbItems={[{value: "Home", href: "#"}]}>
-            <h1>Home</h1>
+            <h1 className={"h-full"}>Home</h1>
         </DashboardLayout>
     );
 }

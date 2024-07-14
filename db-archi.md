@@ -4,15 +4,15 @@
 
 ### Table `collections`
 
-| colonne               | type           | description                                                                 |
-|-----------------------|----------------|-----------------------------------------------------------------------------|
-| id                    | int            | identifiant de la collection                                                |
-| name                  | varchar(255)   | nom de la collection                                                        |
-| description           | text           | description de la collection                                                |
-| creator               | int            | identifiant de l'utilisateur qui a créé la collection                       |
-| default_answer_fields | varchar(255)[] | liste des champs de réponse par défaut lorsque l'utilisateur ajoute un item |
-| is_public             | bool           | indique si la collection est publique ou privée                             |
-| is_static             | bool           | indique si la collection est statique (ne peut pas être modifiée)           |
+| colonne               | type          | description                                                                 |
+|-----------------------|---------------|-----------------------------------------------------------------------------|
+| id                    | int           | identifiant de la collection                                                |
+| name                  | varchar(80)   | nom de la collection                                                        |
+| description           | varchar       | description de la collection                                                |
+| creator               | int           | identifiant de l'utilisateur qui a créé la collection                       |
+| default_answer_fields | varchar(80)[] | liste des champs de réponse par défaut lorsque l'utilisateur ajoute un item |
+| is_public             | bool          | indique si la collection est publique ou privée                             |
+| is_static             | bool          | indique si la collection est statique (ne peut pas être modifiée)           |
 
 ### Table `items`
 

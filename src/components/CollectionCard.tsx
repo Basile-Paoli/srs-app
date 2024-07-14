@@ -15,7 +15,7 @@ export function CollectionCard({collection, editable = true, className, ...props
             <CardHeader>
                 <Link href={`/collections/${collection.id}`}>
 
-                    <CardTitle>{collection.name || "Collection sans nom"}</CardTitle>
+                    <CardTitle className={"break-words"}>{collection.name || "Collection sans nom"}</CardTitle>
                 </Link>
             </CardHeader>
             <CardContent>

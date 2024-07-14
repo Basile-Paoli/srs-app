@@ -4,7 +4,7 @@ import {useState} from "react";
 import InlineEditText from "@/components/ui/InlineEditText";
 import {actionPutCollection} from "@/server-actions/collections-actions";
 import InlineEditTextArea from "@/components/ui/InlineEditTextArea";
-import CollectionSettingsDialog from "@/app/(personal-space)/collections/[collectionId]/edit/CollectionSettingsDialog";
+import CollectionSettingsDialog from "@/app/(dashboard)/collections/[collectionId]/edit/CollectionSettingsDialog";
 import {useRouter} from "next/navigation";
 
 export default function EditCollectionInfo({collection}: { collection: CollectionWithItems }) {
@@ -16,10 +16,10 @@ export default function EditCollectionInfo({collection}: { collection: Collectio
         actionPutCollection(newCollection)
     }
 
-    const publish = newCollection.isPublic ? null : () => {
+    const publish =  () => {
         setNewCollection({...newCollection, isPublic: true, isStatic: true})
         actionPutCollection({...newCollection, isPublic: true, isStatic: true})
-        router.push(`/collections/${newCollection.id}`)
+        router.replace(`/collections/${collection.id}`)
     }
 
     return <div className={"w-full relative"}>

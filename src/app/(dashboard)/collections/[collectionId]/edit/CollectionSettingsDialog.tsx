@@ -6,28 +6,60 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
-import {Cross1Icon, GearIcon} from "@radix-ui/react-icons";
+import {Cross1Icon, GearIcon, QuestionMarkCircledIcon} from "@radix-ui/react-icons";
 import InlineEditText from "@/components/ui/InlineEditText";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import {useState} from "react";
 
 export default function CollectionSettingsDialog({answerFields, setAnswerFields, validate, publish}: {
     answerFields: string[],
     setAnswerFields: (fields: string[]) => void
     validate: () => void,
-    publish: (() => void) | null
+    publish: () => void
 }) {
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [isToolTipOpen, setIsToolTipOpen] = useState(false)
+    const [isToolTipActive, setIsToolTipActive] = useState(false)
+
+    const handleDialogChange = (open: boolean) => {
+        setIsDialogOpen(open)
+        setTimeout(() => setIsToolTipActive(open), 1)
+    }
+    const handleToolTipChange = (open: boolean) => {
+        if(!isToolTipActive) {
+            setIsToolTipOpen(false)
+        }else {
+            setIsToolTipOpen(open)
+        }
+    }
+
     return (
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
             <DialogTrigger>
                 <GearIcon className={"size-7"}/>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Paramètres de la collection</DialogTitle>
+                    <DialogTitle>Collection settings</DialogTitle>
                     <DialogDescription></DialogDescription>
                 </DialogHeader>
-                <div>Champs de réponse par défaut :</div>
+                <Separator/>
+                <div className={"flex"}>
+                    Default answer fields
+                     <TooltipProvider delayDuration={300}>
+						<Tooltip open={isToolTipOpen} onOpenChange={handleToolTipChange}>
+							<TooltipTrigger><QuestionMarkCircledIcon
+								className={"h-5 w-5 self-center justify-self-center ml-1"}/></TooltipTrigger>
+							<TooltipContent side={"bottom"}>
+								These fields will be set by default for all new items in this collection.
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+                </div>
+
+
                 <div className={"w-fit justify-self-center"}>
                     {answerFields?.map((field, index) => (
                         <div className={"flex justify-self-center justify-between"} key={index}>
@@ -50,9 +82,9 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                 </div>
                 <Button className={"w-fit justify-self-center"}
                         onClick={() => setAnswerFields([...answerFields ?? [], ""])}
-                >Ajouter un champ</Button>
+                >Add field</Button>
                 <Separator/>
-                {publish && <Button className={"w-fit justify-self-center"} onClick={publish}>Publier</Button>}
+                <Button className={"w-fit justify-self-center"} onClick={publish}>Publish</Button>
             </DialogContent>
         </Dialog>
     );
