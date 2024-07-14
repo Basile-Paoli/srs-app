@@ -14,10 +14,10 @@ export async function createCollection(userId: number, name?: string): Promise<C
 
 export async function getCollectionsByUser(userId: number): Promise<Collection[]> {
     const {rows} = await sql`
-        SELECT collections.*, count(collections_items) AS item_count
+        SELECT collections.*, count(items) AS item_count
         FROM collections
-                 LEFT JOIN collections_items
-                           ON collections.id = collections_items.collection_id
+                 LEFT JOIN items
+                           ON collections.id = items.collection_id
         WHERE creator = ${userId}
         GROUP BY collections.id`
 
@@ -46,7 +46,8 @@ export async function putCollection(collection: Collection): Promise<void> {
         SET name                  = ${collection.name},
             description           = ${collection.description},
             default_answer_fields = ${stringifyArray(collection.defaultAnswerFields)},
-            is_public             = ${collection.isPublic}
+            is_public             = ${collection.isPublic},
+            is_static             = ${collection.isStatic}
         WHERE id = ${collection.id}`
 }
 

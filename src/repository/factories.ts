@@ -8,6 +8,7 @@ export function collectionFactory(row: QueryResultRow): Collection {
         creator: row.creator,
         defaultAnswerFields: row.default_answer_fields,
         isPublic: row.is_public,
+        isStatic: row.is_static,
         itemCount: row.item_count !== undefined ? parseInt(row.item_count) : undefined,
     }
 }

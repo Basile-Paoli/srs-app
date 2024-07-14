@@ -1,7 +1,13 @@
 "use server";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
-import {createCollection, getCollectionsByUser, getCollectionWithItems, putCollection} from "@/repository/collections";
+import {
+    createCollection,
+    getCollectionById,
+    getCollectionsByUser,
+    getCollectionWithItems,
+    putCollection
+} from "@/repository/collections";
 
 export async function actionCreateCollection(): Promise<Nullable<number>> {
     const session = await getServerSession(authOptions);
@@ -33,6 +39,11 @@ export async function actionGetCollectionById(collectionId: number): Promise<Nul
 export async function actionPutCollection(collection: Collection): Promise<void> {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
+        return
+    }
+
+    const currentCollection = await getCollectionById(collection.id)
+    if (!currentCollection || currentCollection.creator !== session.user.id || currentCollection.isStatic) {
         return
     }
 

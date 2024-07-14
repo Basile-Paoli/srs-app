@@ -17,9 +17,11 @@ export default async function EditCollection({params}: {
     }
 
     const collection = await getCollectionWithItems(collectionId)
-
     if (!session || !session.user || !collection || session.user.id !== collection.creator) {
         redirect("/collections")
+    }
+    if (collection.isStatic) {
+        redirect(`/collections/${collectionId}`)
     }
     const breadcrumbItems = [
         {
@@ -36,10 +38,9 @@ export default async function EditCollection({params}: {
         }
     ]
     return (
-        <DashboardLayout
-            breadcrumbItems={breadcrumbItems}
-        >
+        <DashboardLayout breadcrumbItems={breadcrumbItems}>
             <PageHeading>Edit Collection</PageHeading>
+
             <EditCollectionInfo collection={collection}/>
         </DashboardLayout>
     );

@@ -13,7 +13,10 @@ export function CollectionCard({collection, editable = true, className, ...props
     return (
         <Card {...props} className={cn(className, "min-w-64 max-w-sm")}>
             <CardHeader>
-                <CardTitle>{collection.name || "Collection sans nom"}</CardTitle>
+                <Link href={`/collections/${collection.id}`}>
+
+                    <CardTitle>{collection.name || "Collection sans nom"}</CardTitle>
+                </Link>
             </CardHeader>
             <CardContent>
                 <div className={"flex flex-col"}>

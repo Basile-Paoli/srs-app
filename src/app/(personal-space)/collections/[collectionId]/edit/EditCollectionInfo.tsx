@@ -5,13 +5,23 @@ import InlineEditText from "@/components/ui/InlineEditText";
 import {actionPutCollection} from "@/server-actions/collections-actions";
 import InlineEditTextArea from "@/components/ui/InlineEditTextArea";
 import CollectionSettingsDialog from "@/app/(personal-space)/collections/[collectionId]/edit/CollectionSettingsDialog";
+import {useRouter} from "next/navigation";
 
 export default function EditCollectionInfo({collection}: { collection: CollectionWithItems }) {
+    const router = useRouter()
+
     const [newCollection, setNewCollection] = useState(collection)
 
     const validate = () => {
         actionPutCollection(newCollection)
     }
+
+    const publish = newCollection.isPublic ? null : () => {
+        setNewCollection({...newCollection, isPublic: true, isStatic: true})
+        actionPutCollection({...newCollection, isPublic: true, isStatic: true})
+        router.push(`/collections/${newCollection.id}`)
+    }
+
     return <div className={"w-full relative"}>
         <div className={"absolute right-4 top-0"}>
             <CollectionSettingsDialog
@@ -21,6 +31,7 @@ export default function EditCollectionInfo({collection}: { collection: Collectio
                     defaultAnswerFields: fields
                 })}
                 validate={validate}
+                publish={publish}
             />
         </div>
         <InlineEditText

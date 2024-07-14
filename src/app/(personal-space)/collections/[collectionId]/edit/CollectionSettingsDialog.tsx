@@ -9,11 +9,13 @@ import {
 import {Cross1Icon, GearIcon} from "@radix-ui/react-icons";
 import InlineEditText from "@/components/ui/InlineEditText";
 import {Button} from "@/components/ui/button";
+import {Separator} from "@/components/ui/separator";
 
-export default function CollectionSettingsDialog({answerFields, setAnswerFields, validate}: {
+export default function CollectionSettingsDialog({answerFields, setAnswerFields, validate, publish}: {
     answerFields: string[],
     setAnswerFields: (fields: string[]) => void
-    validate: () => void
+    validate: () => void,
+    publish: (() => void) | null
 }) {
     return (
         <Dialog>
@@ -32,7 +34,6 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                             <InlineEditText
                                 value={field}
                                 onChange={(e) => {
-                                    console.log(e.target.value, index)
                                     setAnswerFields(answerFields.map((f, i) => i === index ? e.target.value : f) ?? [])
                                 }}
                                 onValidate={validate}
@@ -50,6 +51,8 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                 <Button className={"w-fit justify-self-center"}
                         onClick={() => setAnswerFields([...answerFields ?? [], ""])}
                 >Ajouter un champ</Button>
+                <Separator/>
+                {publish && <Button className={"w-fit justify-self-center"} onClick={publish}>Publier</Button>}
             </DialogContent>
         </Dialog>
     );

@@ -1,38 +1,39 @@
 # Architecture base de données
-## Tables
-### Table `collections`
-| colonne     | type | description                                           |
-|-------------|------|-------------------------------------------------------|
-| id          | int  | identifiant de la collection                          |
-| name        | text | nom de la collection                                  |
-| description | text | description de la collection                          |
-| user_id     | int  | identifiant de l'utilisateur qui a créé la collection |
 
+## Tables
+
+### Table `collections`
+
+| colonne               | type           | description                                                                 |
+|-----------------------|----------------|-----------------------------------------------------------------------------|
+| id                    | int            | identifiant de la collection                                                |
+| name                  | varchar(255)   | nom de la collection                                                        |
+| description           | text           | description de la collection                                                |
+| creator               | int            | identifiant de l'utilisateur qui a créé la collection                       |
+| default_answer_fields | varchar(255)[] | liste des champs de réponse par défaut lorsque l'utilisateur ajoute un item |
+| is_public             | bool           | indique si la collection est publique ou privée                             |
+| is_static             | bool           | indique si la collection est statique (ne peut pas être modifiée)           |
 
 ### Table `items`
-| colonne     | type | description                            |
-|-------------|------|----------------------------------------|
-| id          | int  | identifiant de l'item                  |
-| prompt      | text | Élément qui s'affiche lors des reviews |
-| description | text | Description de l'item                  |
 
-### Table `collections_items`
-| colonne       | type | description                  |
-|---------------|------|------------------------------|
-| id            | int  | identifiant de la relation   |
-| collection_id | int  | identifiant de la collection |
-| item_id       | int  | identifiant de l'item        |
+| colonne       | type | description                            |
+|---------------|------|----------------------------------------|
+| id            | int  | identifiant de l'item                  |
+| prompt        | text | Élément qui s'affiche lors des reviews |
+| description   | text | Description de l'item                  |
+| collection_id | int  | identifiant de la collection           |
 
 ### Table `answer_fields`
 
-| colonne | type   | description                     |
-|---------|--------|---------------------------------|
-| id      | int    | identifiant du champ de réponse |
-| item_id | int    | identifiant de l'item           |
-| label   | text   | Label du champ de réponse       |
-| answer  | text[] | Réponse(s) valides              |
+| colonne | type           | description                     |
+|---------|----------------|---------------------------------|
+| id      | int            | identifiant du champ de réponse |
+| item_id | int            | identifiant de l'item           |
+| label   | varchar(255)   | Label du champ de réponse       |
+| answers | varchar(255)[] | Réponse(s) valides              |
 
 ### Table `users`
+
 | colonne         | type         | description                     |
 |-----------------|--------------|---------------------------------|
 | id              | int          | identifiant de l'utilisateur    |
@@ -42,14 +43,16 @@
 | image           | TEXT         | image de l'utilisateur          |
 
 ### Table `custom_answers`
-| colonne         | type | description                     |
-|-----------------|------|---------------------------------|
-| id              | int  | identifiant de la réponse       |
-| user_id         | int  | identifiant de l'utilisateur    |
-| answer_field_id | int  | identifiant du champ de réponse |
-| answer          | text | réponse de l'utilisateur        |
+
+| colonne         | type         | description                     |
+|-----------------|--------------|---------------------------------|
+| id              | int          | identifiant de la réponse       |
+| user_id         | int          | identifiant de l'utilisateur    |
+| answer_field_id | int          | identifiant du champ de réponse |
+| answer          | varchar(255) | réponse de l'utilisateur        |
 
 ### Table `progress`
+
 | colonne     | type        | description                   |
 |-------------|-------------|-------------------------------|
 | id          | int         | identifiant de la progression |
@@ -59,11 +62,12 @@
 | srs_level   | int         | niveau de la répétition       |
 
 ### Table `srs_levels`
-| colonne         | type | description              |
-|-----------------|------|--------------------------|
-| id              | int  | identifiant du niveau    |
-| name            | text | nom du niveau            |
-| interval        | int  | intervalle de répétition |
+
+| colonne  | type | description              |
+|----------|------|--------------------------|
+| id       | int  | identifiant du niveau    |
+| name     | text | nom du niveau            |
+| interval | int  | intervalle de répétition |
 
 
 

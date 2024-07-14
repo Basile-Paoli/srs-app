@@ -7,6 +7,7 @@ interface Collection {
     creator: number,
     defaultAnswerFields: Nullable<string[]>,
     isPublic: boolean,
+    isStatic: boolean,
     itemCount?: number,
     items?: Item[],
 }

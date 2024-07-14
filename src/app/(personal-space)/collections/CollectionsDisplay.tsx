@@ -20,7 +20,7 @@ export function CollectionsDisplay() {
         <div className="flex flex-wrap justify-evenly gap-6 max-w-3xl p-3">
             {isLoading && <LoadingSpinner size={200}/>}
             {collections.map((collection) =>
-                <CollectionCard key={collection.id} collection={collection}/>
+                <CollectionCard key={collection.id} collection={collection} editable={!collection.isStatic}/>
             )}
         </div>
     );
