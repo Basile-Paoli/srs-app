@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import {actionCreateCollection} from "@/server-actions/collections-actions";
 
-export function CreateCollectionButton() {
+export default function CreateCollectionButton() {
     const router = useRouter();
     const clickHandler = async () => {
         const id = await actionCreateCollection();

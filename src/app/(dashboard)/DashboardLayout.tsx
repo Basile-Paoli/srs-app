@@ -7,7 +7,7 @@ type Props = {
     children: ReactNode
 }
 
-export function DashboardLayout({breadcrumbItems, children}: Props) {
+export default function DashboardLayout({breadcrumbItems, children}: Props) {
     return (
         <div className={" h-full flex flex-col"}>
             <SrsBreadcrumb items={breadcrumbItems} className={"p-3"}/>

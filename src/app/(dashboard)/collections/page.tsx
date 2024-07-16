@@ -1,6 +1,6 @@
-import {CreateCollectionButton} from "@/app/(dashboard)/collections/CreateCollectionButton";
-import {CollectionsDisplay} from "@/app/(dashboard)/collections/CollectionsDisplay";
-import {DashboardLayout} from "@/app/(dashboard)/DashboardLayout";
+import CreateCollectionButton from "@/app/(dashboard)/collections/CreateCollectionButton";
+import CollectionsDisplay from "@/app/(dashboard)/collections/CollectionsDisplay";
+import DashboardLayout from "@/app/(dashboard)/DashboardLayout";
 
 
 export default async function Collections() {

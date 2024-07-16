@@ -5,7 +5,7 @@ import {CollectionCard} from "@/components/CollectionCard";
 import {actionGetCollectionsByUser} from "@/server-actions/collections-actions";
 import {LoadingSpinner} from "@/components/ui/LoadingSpinner";
 
-export function CollectionsDisplay() {
+export default function CollectionsDisplay() {
     const [isLoading, setIsLoading] = useState(true)
     const {data} = useSession()
     const [collections, setCollections] = useState<Collection[]>([])

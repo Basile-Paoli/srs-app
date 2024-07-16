@@ -1,4 +1,4 @@
-import {DashboardLayout} from "@/app/(dashboard)/DashboardLayout";
+import DashboardLayout from "@/app/(dashboard)/DashboardLayout";
 
 export default function Home() {
     return (

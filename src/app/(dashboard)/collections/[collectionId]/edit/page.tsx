@@ -1,4 +1,4 @@
-import {DashboardLayout} from "@/app/(dashboard)/DashboardLayout";
+import DashboardLayout from "@/app/(dashboard)/DashboardLayout";
 import EditCollectionInfo from "@/app/(dashboard)/collections/[collectionId]/edit/EditCollectionInfo";
 import {redirect} from "next/navigation";
 import {getCollectionWithItems} from "@/repository/collections";

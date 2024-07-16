@@ -16,7 +16,7 @@ export default function EditCollectionInfo({collection}: { collection: Collectio
         actionPutCollection(newCollection)
     }
 
-    const publish =  () => {
+    const publish = () => {
         setNewCollection({...newCollection, isPublic: true, isStatic: true})
         actionPutCollection({...newCollection, isPublic: true, isStatic: true})
         router.replace(`/collections/${collection.id}`)

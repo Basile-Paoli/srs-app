@@ -33,7 +33,11 @@ export async function actionGetCollectionById(collectionId: number): Promise<Nul
         return null
     }
 
-    return await getCollectionWithItems(collectionId)
+    const collection = await getCollectionWithItems(collectionId)
+    if (!collection || (!collection.isPublic && collection.creator !== session.user.id)) {
+        return null
+    }
+    return collection
 }
 
 export async function actionPutCollection(collection: Collection): Promise<void> {

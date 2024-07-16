@@ -20,5 +20,11 @@ interface Item {
     id: number,
     prompt: string,
     description: Nullable<string>,
+    //answerFields: AnswerField[],
 }
 
+interface AnswerField {
+    id: number,
+    label: string,
+    answers: string[],
+}
