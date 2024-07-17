@@ -7,7 +7,7 @@ export function SignOutButton({children}: {
 }) {
     return (
         <button onClick={() => {
-            signOut()
+            signOut();
         }}>{children}</button>
     );
 }

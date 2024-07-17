@@ -17,7 +17,7 @@ export default async function RootLayout({
                                          }: Readonly<{
     children: ReactNode;
 }>) {
-    const session = await getServerSession(authOptions).catch(() => null)
+    const session = await getServerSession(authOptions).catch(() => null);
     if (!session || !session.user) {
         redirect("/api/auth/signin")
     }
@@ -29,5 +29,5 @@ export default async function RootLayout({
         </SessionProvider>
         </body>
         </html>
-    );
+    )
 }

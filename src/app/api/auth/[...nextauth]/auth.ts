@@ -6,7 +6,7 @@ import {Adapter} from "next-auth/adapters";
 
 const pool = new Pool({
     connectionString: process.env.POSTGRES_URL,
-})
+});
 
 export const authOptions: AuthOptions = {
     providers: [
@@ -22,4 +22,4 @@ export const authOptions: AuthOptions = {
         }
     },
     adapter: PostgresAdapter(pool) as Adapter,
-}
+};

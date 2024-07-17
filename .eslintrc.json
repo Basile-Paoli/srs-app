@@ -1,3 +1,20 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.ts"
+      ],
+      "plugins": [
+        "@stylistic/eslint-plugin",
+        "@typescript-eslint/eslint-plugin"
+      ],
+      "rules": {
+        "@stylistic/semi": "error",
+        "@typescript-eslint/no-unused-vars": "error"
+      }
+    }
+  ]
 }

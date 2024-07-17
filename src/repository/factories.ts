@@ -10,7 +10,7 @@ export function collectionFactory(row: QueryResultRow): Collection {
         isPublic: row.is_public,
         isStatic: row.is_static,
         itemCount: row.item_count !== undefined ? parseInt(row.item_count) : undefined,
-    }
+    };
 }
 
 export function itemFactory(row: QueryResultRow): Item {
@@ -18,5 +18,5 @@ export function itemFactory(row: QueryResultRow): Item {
         id: row.id,
         prompt: row.prompt,
         description: row.description,
-    }
+    };
 }

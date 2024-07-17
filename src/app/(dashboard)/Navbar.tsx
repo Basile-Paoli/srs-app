@@ -10,7 +10,7 @@ export function Navbar() {
         name: string,
         href: string,
         icon: ElementType,
-    }
+    };
     const menus: menu[] = [
         {
             name: "Home",
@@ -27,7 +27,7 @@ export function Navbar() {
             href: "/collections",
             icon: ViewGridIcon,
         },
-    ]
+    ];
 
     return (
         <Sheet>
@@ -49,5 +49,5 @@ export function Navbar() {
                 )}
             </SheetContent>
         </Sheet>
-    );
+    )
 }

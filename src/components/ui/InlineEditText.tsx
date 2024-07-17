@@ -22,18 +22,18 @@ export default function InlineEditText(
     }
         : Props) {
 
-    const [isEditing, setIsEditing] = useState(false)
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleBlur = () => {
-        setIsEditing(false)
-        onValidate()
-    }
+        setIsEditing(false);
+        onValidate();
+    };
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Escape" || e.key === "Enter") {
-            setIsEditing(false)
-            onValidate()
+            setIsEditing(false);
+            onValidate();
         }
-    }
+    };
 
     return <div  {...props} className={cn("flex justify-center ", className)}>
         {isEditing ?
@@ -51,5 +51,5 @@ export default function InlineEditText(
             :
             <p className={"p-1 hover:bg-gray-200/50 text-center min-w-[203px] w-full "}
                onClick={() => setIsEditing(true)}>{value || placeholder}</p>}
-    </div>
+    </div>;
 }

@@ -8,19 +8,20 @@ import CollectionSettingsDialog from "@/app/(dashboard)/collections/[collectionI
 import {useRouter} from "next/navigation";
 
 export default function EditCollectionInfo({collection}: { collection: CollectionWithItems }) {
-    const router = useRouter()
+    const router = useRouter();
 
-    const [newCollection, setNewCollection] = useState(collection)
+    const [newCollection, setNewCollection] = useState(collection);
 
     const validate = () => {
-        actionPutCollection(newCollection)
-    }
+        actionPutCollection(newCollection);
+        router.refresh();
+    };
 
     const publish = () => {
-        setNewCollection({...newCollection, isPublic: true, isStatic: true})
-        actionPutCollection({...newCollection, isPublic: true, isStatic: true})
-        router.replace(`/collections/${collection.id}`)
-    }
+        setNewCollection({...newCollection, isPublic: true, isStatic: true});
+        actionPutCollection({...newCollection, isPublic: true, isStatic: true});
+        router.replace(`/collections/${collection.id}`);
+    };
 
     return <div className={"w-full relative"}>
         <div className={"absolute right-4 top-0"}>
@@ -48,5 +49,5 @@ export default function EditCollectionInfo({collection}: { collection: Collectio
             onValidate={validate}
             placeholder={"Enter a description"}
         />
-    </div>
+    </div>;
 }

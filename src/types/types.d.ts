@@ -1,4 +1,4 @@
-type Nullable<T> = T | null
+type Nullable<T> = T | null;
 
 interface Collection {
     id: number,
@@ -23,8 +23,8 @@ interface Item {
     //answerFields: AnswerField[],
 }
 
-interface AnswerField {
-    id: number,
-    label: string,
-    answers: string[],
-}
+// interface AnswerField {
+//     id: number,
+//     label: string,
+//     answers: string[],
+// }

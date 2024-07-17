@@ -19,21 +19,33 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
     validate: () => void,
     publish: () => void
 }) {
-    const [isDialogOpen, setIsDialogOpen] = useState(false)
-    const [isToolTipOpen, setIsToolTipOpen] = useState(false)
-    const [isToolTipActive, setIsToolTipActive] = useState(false)
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isToolTipOpen, setIsToolTipOpen] = useState(false);
+    const [isToolTipActive, setIsToolTipActive] = useState(false);
 
     const handleDialogChange = (open: boolean) => {
-        setIsDialogOpen(open)
-        setTimeout(() => setIsToolTipActive(open), 1)
-    }
+        setIsDialogOpen(open);
+        setTimeout(() => setIsToolTipActive(open), 1);
+    };
+
     const handleToolTipChange = (open: boolean) => {
-        if(!isToolTipActive) {
-            setIsToolTipOpen(false)
-        }else {
-            setIsToolTipOpen(open)
+        if (!isToolTipActive) {
+            setIsToolTipOpen(false);
+        } else {
+            setIsToolTipOpen(open);
         }
-    }
+    };
+
+    const addField = () => {
+        setAnswerFields([...answerFields ?? [], ""]);
+        validate();
+    };
+    const removeField = (index: number) => {
+        setAnswerFields(answerFields.filter(
+            (_, i) => i !== index
+        ));
+        validate();
+    };
 
     return (
         <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
@@ -48,15 +60,15 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                 <Separator/>
                 <div className={"flex"}>
                     Default answer fields
-                     <TooltipProvider delayDuration={300}>
-						<Tooltip open={isToolTipOpen} onOpenChange={handleToolTipChange}>
-							<TooltipTrigger><QuestionMarkCircledIcon
-								className={"h-5 w-5 self-center justify-self-center ml-1"}/></TooltipTrigger>
-							<TooltipContent side={"bottom"}>
-								These fields will be set by default for all new items in this collection.
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
+                    <TooltipProvider delayDuration={300}>
+                        <Tooltip open={isToolTipOpen} onOpenChange={handleToolTipChange}>
+                            <TooltipTrigger><QuestionMarkCircledIcon
+                                className={"h-5 w-5 self-center justify-self-center ml-1"}/></TooltipTrigger>
+                            <TooltipContent side={"bottom"}>
+                                These fields will be set by default for all new items in this collection.
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
 
 
@@ -66,7 +78,7 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                             <InlineEditText
                                 value={field}
                                 onChange={(e) => {
-                                    setAnswerFields(answerFields.map((f, i) => i === index ? e.target.value : f) ?? [])
+                                    setAnswerFields(answerFields.map((f, i) => i === index ? e.target.value : f) ?? []);
                                 }}
                                 onValidate={validate}
                                 placeholder={"Enter a field"}
@@ -75,13 +87,13 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                             />
                             <Button
                                 size={"sm"} variant={"outline"}
-                                onClick={() => setAnswerFields(answerFields.filter((_, i) => i !== index) ?? [])}
+                                onClick={() =>removeField(index)}
                             ><Cross1Icon/></Button>
                         </div>
                     ))}
                 </div>
                 <Button className={"w-fit justify-self-center"}
-                        onClick={() => setAnswerFields([...answerFields ?? [], ""])}
+                        onClick={addField}
                 >Add field</Button>
                 <Separator/>
                 <Button className={"w-fit justify-self-center"} onClick={publish}>Publish</Button>

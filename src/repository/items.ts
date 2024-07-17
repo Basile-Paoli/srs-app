@@ -5,8 +5,8 @@ export async function getItemsByCollectionId(collectionId: number): Promise<Item
     const {rows} = await sql`
         SELECT i.*
         FROM items i
-        WHERE collection_id = ${collectionId}`
+        WHERE collection_id = ${collectionId}`;
     return rows.map(row => (
         itemFactory(row)
-    ))
+    ));
 }

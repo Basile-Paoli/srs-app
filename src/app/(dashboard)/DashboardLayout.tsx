@@ -5,7 +5,7 @@ import {ReactNode} from "react";
 type Props = {
     breadcrumbItems: { value: ReactNode, href: string }[]
     children: ReactNode
-}
+};
 
 export default function DashboardLayout({breadcrumbItems, children}: Props) {
     return (

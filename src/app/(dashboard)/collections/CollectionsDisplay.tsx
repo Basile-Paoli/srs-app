@@ -6,15 +6,15 @@ import {actionGetCollectionsByUser} from "@/server-actions/collections-actions";
 import {LoadingSpinner} from "@/components/ui/LoadingSpinner";
 
 export default function CollectionsDisplay() {
-    const [isLoading, setIsLoading] = useState(true)
-    const {data} = useSession()
-    const [collections, setCollections] = useState<Collection[]>([])
+    const [isLoading, setIsLoading] = useState(true);
+    const {data} = useSession();
+    const [collections, setCollections] = useState<Collection[]>([]);
     useEffect(() => {
-        if (!data) return
+        if (!data) return;
         actionGetCollectionsByUser(data.user.id).then((result) => {
-            setCollections(result!)
-            setIsLoading(false)
-        })
+            setCollections(result!);
+            setIsLoading(false);
+        });
     }, [data]);
     return (
         <div className="flex flex-wrap justify-evenly gap-6 max-w-3xl p-3">

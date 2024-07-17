@@ -5,7 +5,7 @@ import {Navbar} from "@/app/(dashboard)/Navbar";
 import {SignOutButton} from "@/components/SignOutButton";
 
 export async function Header() {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions);
 
     return (
         <div className={"flex w-screen my-1"}>

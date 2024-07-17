@@ -29,28 +29,28 @@ export default function InlineEditTextArea(
         ...props
     }
         : Props) {
-    const [isEditing, setIsEditing] = useState(false)
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleBlur = () => {
-        setIsEditing(false)
-        onValidate()
-    }
+        setIsEditing(false);
+        onValidate();
+    };
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Escape") {
-            setIsEditing(false)
-            onValidate()
+            setIsEditing(false);
+            onValidate();
         }
-    }
+    };
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onTextChange(e)
+        onTextChange(e);
         e.currentTarget.style.setProperty('height', 'auto');
         e.currentTarget.style.setProperty('height', `${e.currentTarget.scrollHeight}px`);
-    }
+    };
 
     const handleFocus = (e: FocusEvent<HTMLTextAreaElement>) => {
         e.currentTarget.style.setProperty('height', 'auto');
         e.currentTarget.style.setProperty('height', `${e.currentTarget.scrollHeight}px`);
-    }
+    };
 
     return <div  {...props} className={cn("w-full px-10 max-h-96", className)}>
         {isEditing ?
@@ -68,5 +68,5 @@ export default function InlineEditTextArea(
             :
             <div className={"p-1 hover:bg-gray-200/50 whitespace-pre-wrap "}
                  onClick={() => setIsEditing(true)}>{value || placeholder}</div>}
-    </div>
+    </div>;
 }

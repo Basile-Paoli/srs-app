@@ -7,9 +7,9 @@ export async function createCollection(userId: number, name?: string): Promise<C
     const {rows} = await sql`
         INSERT INTO collections (creator, name)
         VALUES (${userId}, ${name || null})
-        RETURNING id`
+        RETURNING id`;
 
-    return collectionFactory(rows[0])
+    return collectionFactory(rows[0]);
 }
 
 export async function getCollectionsByUser(userId: number): Promise<Collection[]> {
@@ -19,24 +19,24 @@ export async function getCollectionsByUser(userId: number): Promise<Collection[]
                  LEFT JOIN items
                            ON collections.id = items.collection_id
         WHERE creator = ${userId}
-        GROUP BY collections.id`
+        GROUP BY collections.id`;
 
     return rows.map(row => (
         collectionFactory(row)
-    ))
+    ));
 }
 
 export async function getCollectionById(collectionId: number): Promise<Nullable<Collection>> {
-    const client = await db.connect()
+    const client = await db.connect();
     let result = await client.sql`
         SELECT *
         FROM collections
-        WHERE id = ${collectionId}`
+        WHERE id = ${collectionId}`;
 
     if (result.rows.length === 0) {
-        return null
+        return null;
     }
-    return collectionFactory(result.rows[0])
+    return collectionFactory(result.rows[0]);
 
 }
 
@@ -48,23 +48,22 @@ export async function putCollection(collection: Collection): Promise<void> {
             default_answer_fields = ${stringifyArray(collection.defaultAnswerFields)},
             is_public             = ${collection.isPublic},
             is_static             = ${collection.isStatic}
-        WHERE id = ${collection.id}`
+        WHERE id = ${collection.id}`;
 }
 
 export async function getCollectionWithItems(collectionId: number): Promise<Nullable<CollectionWithItems>> {
     const [collection, items] = await Promise.all([
         getCollectionById(collectionId),
         getItemsByCollectionId(collectionId)
-    ])
-
+    ]);
     if (!collection) {
-        return null
+        return null;
     }
 
     return {
         ...collection,
         itemCount: items.length,
         items
-    }
+    };
 }
 

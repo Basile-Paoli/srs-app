@@ -9,19 +9,19 @@ import {PageHeading} from "@/components/ui/headings";
 export default async function EditCollection({params}: {
     params: { collectionId: string },
 }) {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions);
 
-    const collectionId = (parseInt(params.collectionId))
+    const collectionId = (parseInt(params.collectionId));
     if (isNaN(collectionId)) {
-        redirect("/collections")
+        redirect("/collections");
     }
 
-    const collection = await getCollectionWithItems(collectionId)
+    const collection = await getCollectionWithItems(collectionId);
     if (!session || !session.user || !collection || session.user.id !== collection.creator) {
-        redirect("/collections")
+        redirect("/collections");
     }
     if (collection.isStatic) {
-        redirect(`/collections/${collectionId}`)
+        redirect(`/collections/${collectionId}`);
     }
     const breadcrumbItems = [
         {
@@ -36,7 +36,7 @@ export default async function EditCollection({params}: {
             value: "Edit",
             href: "#"
         }
-    ]
+    ];
     return (
         <DashboardLayout breadcrumbItems={breadcrumbItems}>
             <PageHeading>Edit Collection</PageHeading>
