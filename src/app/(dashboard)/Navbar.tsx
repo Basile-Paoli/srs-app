@@ -29,25 +29,23 @@ export function Navbar() {
         },
     ];
 
-    return (
-        <Sheet>
-            <SheetTrigger className={"my-1 ml-3"} asChild>
-                <Button variant={"outline"}><HamburgerMenuIcon/></Button>
-            </SheetTrigger>
-            <SheetContent className={"flex flex-col p-0 pt-6"}>
-                <SheetHeader>
-                    <span className={"font-semibold text-primary pl-6"}>SRS App</span>
-                </SheetHeader>
-                {menus.map((menu) =>
-                    <SheetClose asChild key={menu.name}>
-                        <Link key={menu.name} href={menu.href}
-                              className={"flex hover:bg-gray-100 hover:text-primary hover:font-semibold items-center gap-3 pl-6 py-1"}>
-                            <menu.icon/>
-                            {menu.name}
-                        </Link>
-                    </SheetClose>
-                )}
-            </SheetContent>
-        </Sheet>
-    )
+    return (<Sheet>
+        <SheetTrigger className={"my-1 ml-3 text-primary"} asChild>
+            <Button variant={"outline"}><HamburgerMenuIcon/></Button>
+        </SheetTrigger>
+        <SheetContent className={"flex flex-col p-0 pt-6"}>
+            <SheetHeader>
+                <span className={"font-semibold text-primary pl-6"}>SRS App</span>
+            </SheetHeader>
+            {menus.map((menu) =>
+                <SheetClose asChild key={menu.name}>
+                    <Link key={menu.name} href={menu.href}
+                          className={"flex hover:bg-gray-100 hover:text-primary hover:font-semibold  items-center gap-3 pl-6 py-1"}>
+                        <menu.icon className={"text-primary"}/>
+                        {menu.name}
+                    </Link>
+                </SheetClose>
+            )}
+        </SheetContent>
+    </Sheet>);
 }

@@ -28,3 +28,8 @@ interface Item {
 //     label: string,
 //     answers: string[],
 // }
+
+interface User {
+    id: number,
+    name: Nullable<string>
+}

@@ -52,7 +52,7 @@ export default function InlineEditTextArea(
         e.currentTarget.style.setProperty('height', `${e.currentTarget.scrollHeight}px`);
     };
 
-    return <div  {...props} className={cn("w-full px-10 max-h-96", className)}>
+    return <div  {...props} className={cn("w-full h-fit", className)}>
         {isEditing ?
             <textarea
                 placeholder={placeholder}
@@ -66,7 +66,7 @@ export default function InlineEditTextArea(
                 maxLength={maxLength}
             />
             :
-            <div className={"p-1 hover:bg-gray-200/50 whitespace-pre-wrap "}
+            <div className={"p-1 hover:bg-gray-200/50 whitespace-pre-wrap break-words"}
                  onClick={() => setIsEditing(true)}>{value || placeholder}</div>}
     </div>;
 }

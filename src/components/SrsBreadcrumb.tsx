@@ -8,15 +8,16 @@ import {
 import Link from "next/link";
 import React, {ComponentPropsWithoutRef, Fragment,  ReactNode} from "react";
 import {HomeIcon} from "@radix-ui/react-icons";
+import {cn} from "@/lib/utils";
 
 interface Props extends ComponentPropsWithoutRef<"nav"> {
     items: { value: ReactNode, href: string }[]
     separator?: React.ReactNode
 }
 
-export function SrsBreadcrumb({items, ...props}: Props) {
+export function SrsBreadcrumb({items,className, ...props}: Props) {
     return (
-        <Breadcrumb {...props}>
+        <Breadcrumb className={cn("text-primary" ,className)} {...props} >
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>

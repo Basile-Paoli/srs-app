@@ -20,3 +20,10 @@ export function itemFactory(row: QueryResultRow): Item {
         description: row.description,
     };
 }
+
+export function userFactory(row: QueryResultRow): User {
+    return {
+        id: row.id,
+        name: row.name,
+    };
+}

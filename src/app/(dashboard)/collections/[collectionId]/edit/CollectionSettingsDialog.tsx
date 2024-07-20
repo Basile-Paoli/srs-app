@@ -6,17 +6,19 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
-import {Cross1Icon, GearIcon, QuestionMarkCircledIcon} from "@radix-ui/react-icons";
+import {Cross1Icon, QuestionMarkCircledIcon} from "@radix-ui/react-icons";
 import InlineEditText from "@/components/ui/InlineEditText";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 import {useState} from "react";
+import {SettingsIcon} from "@/components/SettingsIcon";
+import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
 
-export default function CollectionSettingsDialog({answerFields, setAnswerFields, validate, publish}: {
+export default function CollectionSettingsDialog({answerFields, setAnswerFields, save, publish}: {
     answerFields: string[],
     setAnswerFields: (fields: string[]) => void
-    validate: () => void,
+    save: () => void,
     publish: () => void
 }) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -38,25 +40,25 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
 
     const addField = () => {
         setAnswerFields([...answerFields ?? [], ""]);
-        validate();
+        save();
     };
     const removeField = (index: number) => {
         setAnswerFields(answerFields.filter(
             (_, i) => i !== index
         ));
-        validate();
+        save();
     };
 
     return (
         <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
             <DialogTrigger>
-                <GearIcon className={"size-7"}/>
+                <SettingsIcon/>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Collection settings</DialogTitle>
-                    <DialogDescription></DialogDescription>
                 </DialogHeader>
+                <VisuallyHidden><DialogDescription></DialogDescription></VisuallyHidden>
                 <Separator/>
                 <div className={"flex"}>
                     Default answer fields
@@ -80,7 +82,7 @@ export default function CollectionSettingsDialog({answerFields, setAnswerFields,
                                 onChange={(e) => {
                                     setAnswerFields(answerFields.map((f, i) => i === index ? e.target.value : f) ?? []);
                                 }}
-                                onValidate={validate}
+                                onValidate={save}
                                 placeholder={"Enter a field"}
                                 maxLength={20}
                                 className={"mr-2 w-full"}

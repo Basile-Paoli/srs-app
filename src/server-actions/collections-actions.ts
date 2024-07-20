@@ -5,7 +5,7 @@ import {
     createCollection,
     getCollectionById,
     getCollectionsByUser,
-    getCollectionWithItems,
+    getCollectionWithItems, publishCollection,
     putCollection
 } from "@/repository/collections";
 
@@ -52,4 +52,18 @@ export async function actionPutCollection(collection: Collection): Promise<void>
     }
 
     await putCollection(collection);
+}
+
+export async function actionPublishCollection(collectionId: number): Promise<void> {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+        return;
+    }
+
+    const collection = await getCollectionById(collectionId);
+    if (!collection || collection.creator !== session.user.id || collection.isStatic) {
+        return;
+    }
+
+    await publishCollection(collectionId);
 }

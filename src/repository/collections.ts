@@ -1,6 +1,6 @@
-import {db, sql} from "@vercel/postgres";
+import {sql} from "@vercel/postgres";
 import {collectionFactory} from "@/repository/factories";
-import {stringifyArray} from "@/repository/db-utils";
+import {stringifyArrayPostgres} from "@/repository/db-utils";
 import {getItemsByCollectionId} from "@/repository/items";
 
 export async function createCollection(userId: number, name?: string): Promise<Collection> {
@@ -27,8 +27,8 @@ export async function getCollectionsByUser(userId: number): Promise<Collection[]
 }
 
 export async function getCollectionById(collectionId: number): Promise<Nullable<Collection>> {
-    const client = await db.connect();
-    let result = await client.sql`
+
+    let result = await sql`
         SELECT *
         FROM collections
         WHERE id = ${collectionId}`;
@@ -41,14 +41,25 @@ export async function getCollectionById(collectionId: number): Promise<Nullable<
 }
 
 export async function putCollection(collection: Collection): Promise<void> {
+
     await sql`
         UPDATE collections
         SET name                  = ${collection.name},
             description           = ${collection.description},
-            default_answer_fields = ${stringifyArray(collection.defaultAnswerFields)},
+            default_answer_fields = ${stringifyArrayPostgres(collection.defaultAnswerFields)},
             is_public             = ${collection.isPublic},
-            is_static             = ${collection.isStatic}
+            is_static             = ${collection.isStatic},
+            last_edited           = NOW()
         WHERE id = ${collection.id}`;
+}
+
+export async function publishCollection(collectionId: number): Promise<void> {
+    await sql`
+        UPDATE collections
+        SET is_public   = TRUE,
+            is_static   = TRUE,
+            upload_date = NOW()
+        WHERE id = ${collectionId}`;
 }
 
 export async function getCollectionWithItems(collectionId: number): Promise<Nullable<CollectionWithItems>> {
