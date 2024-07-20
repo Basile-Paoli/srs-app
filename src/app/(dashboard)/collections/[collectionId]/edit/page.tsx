@@ -1,7 +1,7 @@
 import DashboardLayout from "@/app/(dashboard)/DashboardLayout";
 import EditCollectionInfo from "@/app/(dashboard)/collections/[collectionId]/edit/EditCollectionInfo";
 import {redirect} from "next/navigation";
-import {getCollectionWithItems} from "@/repository/collections";
+import {getCollectionById} from "@/repository/collections";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 import {getServerSession} from "next-auth";
 import {PageHeading} from "@/components/ui/headings";
@@ -16,7 +16,7 @@ export default async function EditCollection({params}: {
         redirect("/collections");
     }
 
-    const collection = await getCollectionWithItems(collectionId);
+    const collection = await getCollectionById(collectionId);
     if (!session || !session.user || !collection || session.user.id !== collection.creator) {
         redirect("/collections");
     }

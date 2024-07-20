@@ -7,7 +7,7 @@ import InlineEditTextArea from "@/components/ui/InlineEditTextArea";
 import CollectionSettingsDialog from "@/app/(dashboard)/collections/[collectionId]/edit/CollectionSettingsDialog";
 import {useRouter} from "next/navigation";
 
-export default function EditCollectionInfo({collection}: { collection: CollectionWithItems }) {
+export default function EditCollectionInfo({collection}: { collection: Collection }) {
     const router = useRouter();
 
     const [newCollection, setNewCollection] = useState(collection);

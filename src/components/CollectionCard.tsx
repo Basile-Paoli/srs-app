@@ -24,9 +24,7 @@ export function CollectionCard({collection, editable = true, className, ...props
                     {collection.description}
                 </div>
 
-                {collection.itemCount !==undefined &&
-					<p>{collection.itemCount} {collection.itemCount === 1 ? "item" : "items"}</p>
-                }
+					<p>{collection.items.length} {collection.items.length === 1 ? "item" : "items"}</p>
 
                 {editable &&
 					<div className={"w-1/2 self-end flex justify-center items-center h-10"}>

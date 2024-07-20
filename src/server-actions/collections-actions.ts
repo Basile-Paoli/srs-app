@@ -5,7 +5,7 @@ import {
     createCollection,
     getCollectionById,
     getCollectionsByUser,
-    getCollectionWithItems, publishCollection,
+    publishCollection,
     putCollection
 } from "@/repository/collections";
 
@@ -15,7 +15,7 @@ export async function actionCreateCollection(): Promise<Nullable<number>> {
         return null;
     }
 
-    return (await createCollection(session.user.id)).id;
+    return await createCollection(session.user.id);
 }
 
 export async function actionGetCollectionsByUser(userId: number): Promise<Nullable<Collection[]>> {
@@ -27,13 +27,13 @@ export async function actionGetCollectionsByUser(userId: number): Promise<Nullab
     return await getCollectionsByUser(userId);
 }
 
-export async function actionGetCollectionById(collectionId: number): Promise<Nullable<CollectionWithItems>> {
+export async function actionGetCollectionById(collectionId: number): Promise<Nullable<Collection>> {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
         return null;
     }
 
-    const collection = await getCollectionWithItems(collectionId);
+    const collection = await getCollectionById(collectionId);
     if (!collection || (!collection.isPublic && collection.creator !== session.user.id)) {
         return null;
     }

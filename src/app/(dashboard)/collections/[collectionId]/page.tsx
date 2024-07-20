@@ -2,7 +2,7 @@ import DashboardLayout from "@/app/(dashboard)/DashboardLayout";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/auth";
 import {redirect} from "next/navigation";
-import {getCollectionWithItems} from "@/repository/collections";
+import {getCollectionById} from "@/repository/collections";
 import {PageHeading, SectionHeading} from "@/components/ui/headings";
 import {getUser} from "@/repository/users";
 import {CollectionSettingsPopover} from "@/app/(dashboard)/collections/[collectionId]/CollectionSettingsPopover";
@@ -19,7 +19,7 @@ export default async function CollectionPage({params}: {
         redirect("/collections");
     }
 
-    const collection = await getCollectionWithItems(collectionId);
+    const collection = await getCollectionById(collectionId);
     if (!session || !session.user || !collection || (!collection.isPublic && collection.creator !== session.user.id)) {
         redirect("/collections");
     }

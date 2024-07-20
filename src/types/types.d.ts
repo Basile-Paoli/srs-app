@@ -1,3 +1,4 @@
+
 type Nullable<T> = T | null;
 
 interface Collection {
@@ -8,26 +9,34 @@ interface Collection {
     defaultAnswerFields: Nullable<string[]>,
     isPublic: boolean,
     isStatic: boolean,
-    itemCount?: number,
-    items?: Item[],
-}
-
-interface CollectionWithItems extends Collection {
-    itemCount: number,
     items: Item[],
 }
+
+interface CollectionInsert {
+    name: Nullable<string>,
+    description: Nullable<string>,
+    creator: number,
+    defaultAnswerFields: Nullable<string[]>,
+    isPublic: boolean,
+    isStatic: boolean,
+}
+
+
 interface Item {
     id: number,
     prompt: string,
     description: Nullable<string>,
-    //answerFields: AnswerField[],
+    collectionId: number,
+    answerFields: AnswerField[],
 }
 
-// interface AnswerField {
-//     id: number,
-//     label: string,
-//     answers: string[],
-// }
+
+interface AnswerField {
+    id: number,
+    label: string,
+    answers: string[],
+    itemId: number,
+}
 
 interface User {
     id: number,
